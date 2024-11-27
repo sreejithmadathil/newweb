@@ -166,108 +166,7 @@
             input.addEventListener('input', calculateTotal);
         });
 
-        // Save data to localStorage
-        function saveData() {
-            const pen = document.getElementById('pen').value;
-
-            if (!pen) {
-                alert('Please enter PEN');
-                return;
-            }
-
-            const personalDetails = {
-                name: document.getElementById('name').value,
-                pan: document.getElementById('pan').value,
-                pen: pen,
-                designation: document.getElementById('designation').value,
-                officeName: document.getElementById('officeName').value,
-            };
-
-            const salaryDetails = [];
-            const rows = document.querySelectorAll('#salaryTableBody tr');
-            rows.forEach(row => {
-                salaryDetails.push({
-                    month: row.cells[0].innerText,
-                    BP: row.querySelector('[data-type="BP"]').value,
-                    DA: row.querySelector('[data-type="DA"]').value,
-                    HRA: row.querySelector('[data-type="HRA"]').value,
-                    CCA: row.querySelector('[data-type="CCA"]').value,
-                    PF: row.querySelector('[data-type="PF"]').value,
-                    MEDISEP: row.querySelector('[data-type="MEDISEP"]').value,
-                    LIC: row.querySelector('[data-type="LIC"]').value,
-                    TOTAL: row.querySelector('[data-type="TOTAL"]').value,
-                });
-            });
-
-            const otherDetails = {
-                gpa: document.getElementById('gpa').value,
-                pft: document.getElementById('pft').value,
-                leaveSurrender: document.getElementById('leaveSurrender').value,
-            };
-
-            const employeeData = {
-                personalDetails,
-                salaryDetails,
-                otherDetails
-            };
-
-            // Store in localStorage with PEN as key
-            localStorage.setItem(pen, JSON.stringify(employeeData));
-            alert('Data saved successfully!');
-        }
-
-        // Search data by PEN
-        function searchData() {
-            const penSearch = document.getElementById('penSearch').value;
-            if (!penSearch) {
-                alert('Please enter a PEN to search.');
-                return;
-            }
-
-            const data = localStorage.getItem(penSearch);
-            if (data) {
-                const employeeData = JSON.parse(data);
-
-                // Populate Personal Details
-                document.getElementById('name').value = employeeData.personalDetails.name;
-                document.getElementById('pan').value = employeeData.personalDetails.pan;
-                document.getElementById('pen').value = employeeData.personalDetails.pen;
-                document.getElementById('designation').value = employeeData.personalDetails.designation;
-                document.getElementById('officeName').value = employeeData.personalDetails.officeName;
-
-                // Populate Salary Details
-                employeeData.salaryDetails.forEach((item, index) => {
-                    const row = document.querySelector(`#salaryTableBody tr:nth-child(${index + 1})`);
-                    row.querySelector('[data-type="BP"]').value = item.BP;
-                    row.querySelector('[data-type="DA"]').value = item.DA;
-                    row.querySelector('[data-type="HRA"]').value = item.HRA;
-                    row.querySelector('[data-type="CCA"]').value = item.CCA;
-                    row.querySelector('[data-type="PF"]').value = item.PF;
-                    row.querySelector('[data-type="MEDISEP"]').value = item.MEDISEP;
-                    row.querySelector('[data-type="LIC"]').value = item.LIC;
-                    row.querySelector('[data-type="TOTAL"]').value = item.TOTAL;
-                });
-
-                // Populate Other Details
-                document.getElementById('gpa').value = employeeData.otherDetails.gpa;
-                document.getElementById('pft').value = employeeData.otherDetails.pft;
-                document.getElementById('leaveSurrender').value = employeeData.otherDetails.leaveSurrender;
-                
-                // Recalculate totals
-                calculateTotal();
-            } else {
-                alert('No data found for this PEN.');
-            }
-        }
-    </script>
-</body>
-</html>
-
-
-
-///////////////////////////
-// Save data to localStorage
-function saveData() {
+       function saveData() {
     const pen = document.getElementById('pen').value;
 
     if (!pen) {
@@ -368,3 +267,6 @@ function searchData() {
         alert('No data found for this PEN.');
     }
 }
+    </script>
+</body>
+</html>
